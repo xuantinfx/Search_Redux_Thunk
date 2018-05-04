@@ -7,17 +7,25 @@ import { createStore, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import thunk from "redux-thunk";
 import reducer from "./reducers/index";
+import { Container, Row, Col } from "reactstrap";
+import 'bootstrap/dist/css/bootstrap.min.css';
 
 let store = createStore(reducer, applyMiddleware(thunk));
 
 store.subscribe(() => {
-  console.log('STATE:',store.getState());
+  console.log("STATE:", store.getState());
 });
 
 ReactDOM.render(
-  <Provider store={store}>
-    <App />
-  </Provider>,
+  <Container>
+    <Row>
+      <Col sm={{ size: 8, offset: 2 }}>
+        <Provider store={store}>
+          <App />
+        </Provider>
+      </Col>
+    </Row>
+  </Container>,
   document.getElementById("root")
 );
 registerServiceWorker();

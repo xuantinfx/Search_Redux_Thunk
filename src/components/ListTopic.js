@@ -4,11 +4,11 @@ import Topic from "./Topic";
 export default class ListTopic extends React.Component {
   render() {
     return (
-      <ul>
+      <div style={{marginTop: 30}}>
         {this.props.listTopic.map((item, key) => {
-          return <Topic key={key}>{item}</Topic>;
+          return <Topic key={key}>{key + 1}. {item}</Topic>;
         })}
-      </ul>
+      </div>
     );
   }
 }

@@ -4,20 +4,16 @@ export default class Loading extends React.Component {
   render() {
     if (this.props.isFetching) {
       return (
-        <div className="self-building-square-spinner">
-          <div className="square" />
-          <div className="square" />
-          <div className="square" />
-          <div className="square clear" />
-          <div className="square" />
-          <div className="square" />
-          <div className="square clear" />
-          <div className="square" />
-          <div className="square" />
+        <div className="atom-spinner">
+          <div className="spinner-inner">
+            <div className="spinner-line" />
+            <div className="spinner-line" />
+            <div className="spinner-line" />
+            <div className="spinner-circle">&#9679;</div>
+          </div>
         </div>
       );
-    }
-    else{
+    } else {
       return null;
     }
   }
