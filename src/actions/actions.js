@@ -4,7 +4,9 @@ const actions = {
     BEGIN_SEARCH: 'BEGIN_SEARCH',
     LOADED_DATA: 'LOADED_DATA',
     LOAD_MORE: 'LOAD_MORE',
-    LOAD_MORE_SUCESS: 'LOAD_MORE_SUCCESS'
+    LOAD_MORE_SUCESS: 'LOAD_MORE_SUCCESS',
+    LOAD_FALSE: 'LOAD_FALSE',
+    LOAD_NO_DATA: 'LOAD_NO_DATA'
 }
 
 export default actions;
@@ -20,6 +22,18 @@ export const loadedData = (listTopic) => {
     return {
         type: actions.LOADED_DATA,
         listTopic
+    }
+}
+
+export const loadFalse = () => {
+    return {
+        type: actions.LOAD_FALSE
+    }
+}
+
+export const loadNoData = () => {
+    return {
+        type: actions.LOAD_NO_DATA
     }
 }
 
@@ -45,10 +59,14 @@ export const fetchData = keyWord => {
             const listTopic = data.data.data.data.map(item => {
                 return item.topic;
             });
+            if(listTopic.length === 0){
+                return dispatch(loadNoData())
+            }
             dispatch(loadedData(listTopic))
         })
         .catch(err => {
             console.log(err+'')
+            dispatch(loadFalse())
         })
     }
 }
@@ -67,6 +85,7 @@ export const fetchDataMore = (keyWord, page) => {
         })
         .catch(err => {
             console.log(err+'')
+            dispatch(loadFalse);
         })
     }
 }

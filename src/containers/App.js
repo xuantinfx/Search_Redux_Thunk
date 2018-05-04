@@ -6,7 +6,9 @@ const mapStateToProps = (state) => {
     return {
         keyWord: state.keyWord,
         searched: state.searched,
-        hasMore: state.hasMore
+        hasMore: state.hasMore,
+        message: state.message,
+        err: state.err
     }
 }
 

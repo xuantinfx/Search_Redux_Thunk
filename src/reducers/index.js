@@ -17,7 +17,9 @@ const reducer = (state = defaultState, action) => {
         keyWord: action.keyWord,
         listTopic: [],
         searched: false,
-        hasMore: false
+        hasMore: false,
+        err: undefined,
+        message: undefined
       };
     case actions.LOADED_DATA:
       return {
@@ -26,14 +28,18 @@ const reducer = (state = defaultState, action) => {
         dataFetched: true,
         isFetching: false,
         searched: true,
-        hasMore: true
+        hasMore: true,
+        err: undefined,
+        message: undefined
       };
     case actions.LOAD_MORE:
       return {
         ...state,
         dataFetched: false,
         isFetching: true,
-        searched: true
+        searched: true,
+        err: undefined,
+        message: undefined
       };
     case actions.LOAD_MORE_SUCESS:
       if (action.listTopic.length === 0) {
@@ -42,21 +48,41 @@ const reducer = (state = defaultState, action) => {
           dataFetched: true,
           isFetching: false,
           searched: false,
-          hasMore: false
+          hasMore: false,
+          err: undefined,
+          message: undefined
         };
       }
-      debugger;
-      let tempArr = state.listTopic.concat(action.listTopic);
-      let tmp = {
+      return {
         ...state,
-        listTopic: tempArr,
+        listTopic: state.listTopic.concat(action.listTopic),
         dataFetched: true,
         isFetching: false,
         searched: true,
-        hasMore: true
+        hasMore: true,
+        err: undefined,
+        message: undefined
       };
-      debugger;
-      return tmp;
+    case actions.LOAD_FALSE:
+      return {
+        ...state,
+        dataFetched: true,
+        isFetching: false,
+        searched: true,
+        hasMore: false,
+        err: 'Không thể load nội dung!',
+        message: undefined
+      }
+    case actions.LOAD_NO_DATA:
+      return {
+        ...state,
+        dataFetched: true,
+        isFetching: false,
+        searched: true,
+        hasMore: false,
+        message: 'Không tìm thấy kết quả ứng với từ khoá của bạn',
+        err: undefined
+      }
     default:
       return state;
   }

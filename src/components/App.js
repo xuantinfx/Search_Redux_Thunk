@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-//import '../App.css';
 import InputSearch from "../containers/InputSearch";
 import ListTopic from "../containers/ListTopic";
 import Loading from "../containers/Loading";
 import "../css/test.css";
 import { Row, Col } from "reactstrap";
 import InfiniteScroll from "react-infinite-scroller";
+import Message from './Message'
+import Error from './Error'
 
 class App extends Component {
   loadMore = page => {
@@ -23,7 +24,17 @@ class App extends Component {
       >
         <div className="App">
           <InputSearch />
+          <Row>
+            <Col md={{size: 8}}>
+              {this.props.message?<Message>{this.props.message}</Message>:null}
+            </Col>
+          </Row>
           <ListTopic />
+          <Row>
+            <Col md={{size: 8}}>
+              {this.props.err?<Error>{this.props.err}</Error>:null}
+            </Col>
+          </Row>
           <Row >
             <Col md={{size: 2, offset: 4}}>
               <Loading />
